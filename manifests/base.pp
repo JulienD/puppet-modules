@@ -1,3 +1,7 @@
+Exec { path => ["/usr/bin", "/bin", "/usr/sbin", "/sbin"] }
+File { owner => 'root', group => 'root' }
+
+
 # Classes definitions are managed by the main class Stage instead of include
 # them via the include command (ex : include php).
 # The class Stages is a method to control the ordering of resource management
@@ -9,9 +13,7 @@
 stage { "first": before => Stage["main"] }
 stage { "last": require => Stage["main"] }
 
-
- import "settings"
-
+import "settings"
 
 # To execute your provisioning you just have to implement them and defining the
 # stage orders.
@@ -22,4 +24,8 @@ class {
   "php":  	    stage => main;
   "mysql":      stage => main;
   "phpmyadmin": stage => last;
+  "drush":		stage => last;
 }
+
+
+
