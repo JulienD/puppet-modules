@@ -1,11 +1,17 @@
 # Class: mysql
 #
-# This class installs MySQL.
+#   This class installs mysql.
 #
-class mysql {
-
-  $packages = ["mysql-server", "mysql-common", "mysql-client"] # "mytop"?
-
+# Parameters:
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
+class mysql::install {
+  $packages = ["mysql-server", "mysql-common", "mysql-client", "mytop"]
   package { $packages:
     ensure => present,
   }
@@ -15,19 +21,19 @@ class mysql {
     ensure => running,
     require => Package["mysql-server"],
   }
+}
 
+class mysql::config {
   exec { "set-mysql-password":
-    path => ["/usr/bin"],
     unless  => "mysqladmin -uroot -p$mysql_password status",
     command => "mysqladmin -uroot password $mysql_password",
-    require => Service["mysql"],
+    require => Class["mysql::install"],
   }
 
   file { "mycnf":
     path    => "/etc/mysql/my.cnf",
     source  => "puppet:///modules/mysql/my.cnf",
-    require => Package["mysql-server"],
-    notify  => Service["mysql"];
+    require => Class["mysql::install"],
   }
 }
 
@@ -41,6 +47,11 @@ class mysql {
       require => Service["mysqld"],
     }
   }
+}
 
   mysqldb { "myapp": user => "myappuser", password => "5uper5secret" }
 */
+
+class mysql {
+  include mysql::install, mysql::config
+}
