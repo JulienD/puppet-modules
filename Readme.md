@@ -17,7 +17,7 @@ This repository is a handy set of Puppet modules for managing a LAMP stack, and 
 
 <p>Next, clone the Git repository:</p>
 
-    git clone git@github.com:wulff/puppet-drupal.git
+    git clone git://github.com/JulienD/puppet-modules.git
 
 <h2>Initialization</h2>
 
