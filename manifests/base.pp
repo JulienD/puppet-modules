@@ -10,22 +10,21 @@ File { owner => 'root', group => 'root' }
 # catalog run.
 
 # Three levels of order are available (first / main / last).
-stage { "first": before => Stage["main"] }
-stage { "last": require => Stage["main"] }
+stage { "first": before  => Stage["main"] }
+stage { "last":  require => Stage["main"] }
 
 import "settings"
 
 # To execute your provisioning you just have to implement them and defining the
 # stage orders.
 class {
-  "bootstrap":  stage => first;
-  "tools": 	    stage => main;
-  "apache":     stage => main;
-  "php":  	    stage => main;
-  "mysql":      stage => main;
-  "phpmyadmin": stage => last;
-  "drush":		stage => last;
+  "bootstrap":  		stage => first;
+  "tools": 	    		stage => main;
+  "apache":     		stage => main;
+  "php":  	    		stage => main;
+  "mysql":      		stage => main;
+  "phpmyadmin": 		stage => last;
+  "memcache":			stage => last;
+  "drush":				stage => last;
+  "git":				stage => last;
 }
-
-
-
