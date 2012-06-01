@@ -4,11 +4,19 @@ This repository is a handy set of Puppet modules for managing a LAMP stack, and 
 
 * Apache 2.2
 * PHP 5.3
-* -xdebug- TODO
 * phpMyAdmin
 * MySQL Server
 * Drush
-* -Git and SVN clients- TODO
+* Git
+* Memcache
+
+TODO list
+* xdebug
+* memcacheadmin
+* apc + admin
+* mongodb + admin
+* xhprof
+* nodejs
 
 <h2>Installation</h2>
 <p>To get started with puppet run the following commands to download and install the required packages:</p>
