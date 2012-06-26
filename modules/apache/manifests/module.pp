@@ -11,7 +11,7 @@
 define apache::module () {
   exec { "/usr/sbin/a2enmod ${name}" :
   	unless  => "/bin/readlink -e /etc/apache2/mods-enabled/${name}.load",
-  	require => Package["httpd"],
-  	notify  => Service["httpd"],
+  	require => Class[apache],
+  	notify  => Class[apache::service],
   }
 }
