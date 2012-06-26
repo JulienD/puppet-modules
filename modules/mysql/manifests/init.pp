@@ -15,7 +15,6 @@ class mysql::install {
   package { $packages:
     ensure => present,
   }
-
   service { "mysql":
     enable => true,
     ensure => running,
@@ -29,7 +28,6 @@ class mysql::config {
     command => "mysqladmin -uroot password $mysql_password",
     require => Class["mysql::install"],
   }
-
   file { "mycnf":
     path    => "/etc/mysql/my.cnf",
     source  => "puppet:///modules/mysql/my.cnf",
@@ -38,17 +36,16 @@ class mysql::config {
 }
 
 /*
-#Create MySQL database and user
-  define mysqldb( $user, $password ) {
-    exec { "create-${name}-db":
-      path => ["/usr/bin"],
-      unless => "mysql -u${user} -p${password} ${name}",
-      command => "mysql -uroot -p$mysql_password -e \"create database ${name}; grant all on ${name}.* to ${user}@localhost identified by '$password';\"",
-      require => Service["mysqld"],
+  #Create MySQL database and user
+    define mysqldb( $user, $password ) {
+      exec { "create-${name}-db":
+        path => ["/usr/bin"],
+        unless => "mysql -u${user} -p${password} ${name}",
+        command => "mysql -uroot -p$mysql_password -e \"create database ${name}; grant all on ${name}.* to ${user}@localhost identified by '$password';\"",
+        require => Service["mysqld"],
+      }
     }
   }
-}
-
   mysqldb { "myapp": user => "myappuser", password => "5uper5secret" }
 */
 

@@ -18,7 +18,7 @@ class git::install {
 }
 
 class git::config {
-  file {"/home/${username}/.gitconfig":
+  file { "/home/${username}/.gitconfig":
     content => template('git/gitconfig.erb'),
     require => Class['git::install'],
   }

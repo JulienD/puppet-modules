@@ -23,28 +23,29 @@ class php::config {
 
   file {
     "php_a2_ini":
-      path => "/etc/php5/apache2/php.ini",
-      ensure => present,
-      source => "puppet:///modules/php/php_a2.ini",
-      owner => 'root',
-      group => 'root',
-      require => Package['php5', 'libapache2-mod-php5'];
+      path    => "/etc/php5/apache2/php.ini",
+      ensure  => present,
+      source  => "puppet:///modules/php/php_a2.ini",
+      owner   => 'root',
+      group   => 'root',
+      require => Package['php5', 'libapache2-mod-php5'],
+      notify  => Class['apache::service'];
 
     "php_cli_ini":
-      path => "/etc/php5/cli/php.ini",
-      ensure => present,
-      source => "puppet:///modules/php/php_cli.ini",
-      owner => 'root',
-      group => 'root',
+      path    => "/etc/php5/cli/php.ini",
+      ensure  => present,
+      source  => "puppet:///modules/php/php_cli.ini",
+      owner   => 'root',
+      group   => 'root',
       require => Package['php5', 'php5-cli'];
 
-    # FIXME : Check if this directory is created, beacause there is a dependency with the apache class.
+    /*
     "phpinfo":
       path    => "/var/www/${server_info_dir}/index.php",
       content => "<?php phpinfo(); ?>",
       ensure  => present,
-      notify  => Package['php5'],
       require => File['server_info_dir'];
+    */
   }
 }
 

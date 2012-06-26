@@ -2,18 +2,10 @@
 #
 #   This class installs phpmyadmin software.
 #
-# Parameters:
-#
-# Actions:
-#
-# Requires:
-#
-# Sample Usage:
-#
 class phpmyadmin::install {
   package { "phpmyadmin" :
     ensure => present,
-    require => Class["mysql", "php"],
+    require => Class["mysql", "php", "apache"],
   }
 }
 

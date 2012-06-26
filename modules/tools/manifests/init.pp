@@ -4,7 +4,7 @@
 #
 class tools::install {
 
-  $packages = ["curl", "wget", "vim"]
+  $packages = [ "curl", "wget", "vim" ]
 
   package { $packages:
     ensure => present,

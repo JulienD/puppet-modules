@@ -5,6 +5,7 @@
 # Parameters:
 #
 # Actions:
+#    Installation of drush and Console_Tab
 #
 # Requires:
 #    class::php
@@ -20,7 +21,7 @@ class drush::install {
   }
 
   php::pear::module { "drush":
-    #version    => "4.6.0",
+    version    => "5.2.0",
     repository => "drush",
     require    => Exec['drush_pear_discover'],
   }
