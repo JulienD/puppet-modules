@@ -22,9 +22,13 @@ class {
   "tools": 	    		stage => main;
   "apache":     		stage => main;
   "php":  	    		stage => main;
+  "apc":            stage => main;
   "mysql":      		stage => main;
   "phpmyadmin": 		stage => last;
-  "memcache":			stage => last;
-  "drush":				stage => last;
-  "git":				stage => last;
+  # "memcache":			stage => last;
+  # "drush":				stage => last;
+  # "git":				stage => last;
+  # "xdebug":				stage => last;
 }
+
+# import "nodes"
