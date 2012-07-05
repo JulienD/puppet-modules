@@ -15,11 +15,8 @@ class phpmyadmin::config {
     name    => "/etc/apache2/sites-enabled/phpmyadmin",
     ensure  => link,
     target  => "/etc/phpmyadmin/apache.conf",
+    notify  => Class["apache::service"],
     require => Class["phpmyadmin::install"],
-  }
-
-  exec { "sudo apache2ctl graceful" :
-    require => File["a2en_phpmyadmin"],
   }
 }
 
