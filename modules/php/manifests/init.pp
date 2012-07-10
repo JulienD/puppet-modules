@@ -2,25 +2,14 @@
 #
 #   This class installs php5.
 #
-# Parameters:
-#
-# Actions:
-#
-# Requires:
-#
-# Sample Usage:
-#
 class php::install {
-
   $packages = ["libapache2-mod-php5", "php5", "php5-cli", "php5-mysql", "php5-curl", "php5-dev", "php5-mcrypt", "php5-gd", "libpcre3-dev"]
-
   package { $packages:
     ensure => present,
   }
 }
 
 class php::config {
-
   file {
     "php_a2_ini":
       path    => "/etc/php5/apache2/php.ini",
@@ -38,14 +27,6 @@ class php::config {
       owner   => 'root',
       group   => 'root',
       require => Package['php5', 'php5-cli'];
-
-    /*
-    "phpinfo":
-      path    => "/var/www/${server_info_dir}/index.php",
-      content => "<?php phpinfo(); ?>",
-      ensure  => present,
-      require => File['server_info_dir'];
-    */
   }
 }
 

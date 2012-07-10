@@ -2,14 +2,6 @@
 #
 #   This class installs php pear.
 #
-# Parameters:
-#
-# Actions:
-#
-# Requires:
-#
-# Sample Usage:
-#
 class php::pear::install {
 
   package { "php-pear":

@@ -11,7 +11,6 @@
 #
 # Sample Usage:
 #  apache::vhost { 'site.name.fqdn':
-#    priority => '20',
 #    port => '80',
 #    docroot => '/path/to/docroot',
 #  }
@@ -20,31 +19,33 @@ define apache::vhost(
   $port,
   $docroot,
   $ssl=true,
-  $priority,
   $template='apache/vhost-default.conf.erb',
   $serveraliases = ''
   ) {
 
   file {
     "vhost_${name}":
-      #unless  => "test -e /etc/apache2/sites-available/${name}", # Find why the unless do an error
-      path    => "/etc/apache2/sites-available/${priority}-${name}",
+      path    => "/etc/apache2/sites-available/${name}",
+      ensure => 'present',
       content => template($template),
-      mode    => '777',
+      mode    => '644',
+      owner => 'root',
+      group => 'root',
       require => Package['httpd'],
       notify  => Service['httpd'];
 
     "docroot_${name}":
       path    => $docroot,
-      ensure  => directory,
+      ensure => "directory",
       recurse => true,
-      mode    => "0777",
-      notify  => Service['httpd'],
       require => File["vhost_${name}"];
   }
 
-  exec { [ "sudo a2ensite ${priority}-${name}" ] :
+  exec { "enable_apache_vhost" :
+    command => "sudo a2ensite ${name}",
     notify  => Service["apache2"],
+     unless  => "test -e /etc/apache2/sites-enabled/${name}",
     require => File["vhost_${name}"];
   }
+
 }

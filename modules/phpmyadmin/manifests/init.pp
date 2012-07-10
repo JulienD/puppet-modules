@@ -10,7 +10,6 @@ class phpmyadmin::install {
 }
 
 class phpmyadmin::config {
-
   file { "a2en_phpmyadmin":
     name    => "/etc/apache2/sites-enabled/phpmyadmin",
     ensure  => link,

@@ -3,7 +3,7 @@
 #   This class installs other usefull packages.
 #
 class tools::install {
-  $packages = [ "curl", "wget", "vim" ]
+  $packages = [ "curl", "wget", "vim", "unzip" ]
   package { $packages:
     ensure => present,
   }

@@ -36,17 +36,9 @@ class mongodb(
     require => Package["python-software-properties"],
   }
 
-/*
   exec { "10gen-apt-key":
     command => "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10",
-    unless => "sudo apt-key list | grep 10gen",
-    require => Exec["10gen-apt-repo"],
-  }
-*/
-
-  # Spécial Figaro
-  exec { "10gen-apt-key":
-    command => "wget -P /tmp/ http://docs.mongodb.org/10gen-gpg-key.asc && sudo apt-key add 10gen-gpg-key.asc && rm -f /tmp/10gen-gpg-key.asc",
+    # Figaro command => "wget -P /$HOME http://docs.mongodb.org/10gen-gpg-key.asc && sudo apt-key add 10gen-gpg-key.asc && rm -f /$HOME/10gen-gpg-key.asc",
     unless => "sudo apt-key list | grep 10gen",
     require => Exec["10gen-apt-repo"],
   }

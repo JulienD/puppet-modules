@@ -12,6 +12,8 @@
 #
 class memcache::install {
 
+
+# 1) sudo apt-get install php5-memcached
   package {'memcached':
     ensure => present,
   }

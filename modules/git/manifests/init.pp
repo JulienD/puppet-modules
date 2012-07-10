@@ -1,15 +1,7 @@
 # Class: git
 #
 #   This class installs git and add a config file containing aliases and colors
-#   definition...
-#
-# Parameters:
-#
-# Actions:
-#
-# Requires:
-#
-# Sample Usage:
+#   definition.
 #
 class git::install {
   package { 'git-core':

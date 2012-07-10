@@ -1,19 +1,11 @@
 # Class: drush
 #
-#   This class installs drush, the drupal shell tool.
-#
-# Parameters:
-#
-# Actions:
-#    Installation of drush and Console_Tab
+#   This class installs drush.
 #
 # Requires:
 #    class::php
 #
-# Sample Usage:
-#
 class drush::install {
-
   exec { "drush_pear_discover":
     command => "pear channel-discover pear.drush.org",
     unless  => "pear list-channels | grep 'pear.drush.org'",
@@ -21,9 +13,8 @@ class drush::install {
   }
 
   php::pear::module { "drush":
-    version    => "5.2.0",
+    version    => "4.7.0",
     repository => "drush",
-    require    => Exec['drush_pear_discover'],
   }
 }
 
@@ -32,7 +23,6 @@ class drush::config {
     require => Class['drush::install'],
   }
 }
-
 
 class drush {
   include php
