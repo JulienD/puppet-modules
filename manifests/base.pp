@@ -1,34 +1,37 @@
 Exec { path => ["/usr/bin", "/bin", "/usr/sbin", "/sbin"] }
-File { owner => 'root', group => 'root' }
-
-
-# Classes definitions are managed by the main class Stage instead of include
-# them via the include command (ex : include php).
-# The class Stages is a method to control the ordering of resource management
-# in puppet. This provides the ability to associate a class to a single stage
-# and Puppet will guarantee stages run in a specific predictable order every
-# catalog run.
-
-# Three levels of order are available (first / main / last).
-stage { "first": before  => Stage["main"] }
-stage { "last":  require => Stage["main"] }
+# File { owner => 'root', group => 'root' }
+group { "puppet": ensure => "present"}
 
 import "settings"
 
-# To execute your provisioning you just have to implement them and defining the
-# stage orders.
-class {
-  "bootstrap":  		stage => first;
-  "tools": 	    		stage => main;
-  "apache":     		stage => main;
-  "php":  	    		stage => main;
-  "apc":            stage => main;
-  "mysql":      		stage => main;
-  "phpmyadmin": 		stage => last;
-  # "memcache":			stage => last;
-  # "drush":				stage => last;
-  # "git":				stage => last;
-  # "xdebug":				stage => last;
+# Ensure that packages are up to date before beginning.
+exec { "apt-get update":
+  command => "/usr/bin/apt-get update",
+}
+Package {
+  require => Exec["apt-get update"]
+}
+File {
+  require => Exec["apt-get update"]
 }
 
-# import "nodes"
+include tools
+include apache
+include php
+#include apc
+#include mysql
+#include phpmyadmin
+#include drush
+#include git
+#include mongodb
+
+
+# Tatiana configuration.
+/*apache::vhost {
+  "tatiana":
+    port => "80",
+    docroot => "/home/vagrant/public/public_html/tatiana",
+    name => "vagrant.tatiana.lefigaro.fr",
+   # priority => "20";
+}
+*/
