@@ -25,10 +25,15 @@ class apache::config {
   apache::module { "rewrite": }
 
   file {
-    "publich_html_symlink":
+    "public_html":
+      path   => "/home/vagrant/public_html/",
+      ensure  => "directory",
+
+    "public_html_symlink":
       path   => "/home/vagrant/public_html",
       ensure => "link",
-      target => "/home/vagrant/public/public_html";
+      target => "/home/vagrant/public/public_html",
+      require => File["public_html"];
 
     "server_info_dir":
       path    => "/var/www/${server_info_dir}/",
