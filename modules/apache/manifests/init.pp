@@ -27,7 +27,7 @@ class apache::config {
   file {
     "public_html":
       path   => "/home/vagrant/public_html/",
-      ensure  => "directory",
+      ensure  => "directory";
 
     "public_html_symlink":
       path   => "/home/vagrant/public_html",
