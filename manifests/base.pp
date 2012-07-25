@@ -19,19 +19,8 @@ include tools
 include apache
 include php
 #include apc
-#include mysql
-#include phpmyadmin
+include mysql
+include phpmyadmin
 #include drush
 #include git
 #include mongodb
-
-
-# Tatiana configuration.
-/*apache::vhost {
-  "tatiana":
-    port => "80",
-    docroot => "/home/vagrant/public/public_html/tatiana",
-    name => "vagrant.tatiana.lefigaro.fr",
-   # priority => "20";
-}
-*/
