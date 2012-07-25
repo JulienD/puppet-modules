@@ -13,7 +13,7 @@ class drush::install {
   }
 
   php::pear::module { "drush":
-    version    => "4.7.0",
+    #version    => "4.7.0",
     repository => "drush",
   }
 }
